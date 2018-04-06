@@ -22,5 +22,9 @@ namespace LmycWeb.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        public DbSet<Boat> Boats { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
