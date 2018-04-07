@@ -8,16 +8,91 @@ using System.Threading.Tasks;
 
 namespace LmycWeb.Data
 {
-    public class DummyData
+    public static class DummyData
     {
-        // Boats sample data
-        public Boat[] GetBoats(ApplicationDbContext context)
+        public static void SeedUsers(UserManager<ApplicationUser> userManager)
         {
-            //var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-            //var adminUser = userManager.FindByEmail("a@a.a");
-            //var memberUser = userManager.FindByEmail("m@m.m");
+            IdentityResult result;
 
-            
+            if (userManager.FindByEmailAsync("a@a.a").Result == null)
+            {
+                ApplicationUser admin = new ApplicationUser()
+                {
+                    UserName = "a",
+                    Email = "a@a.a",
+                    FirstName = "Bob",
+                    LastName = "Admin",
+                    Street = "Main St",
+                    City = "Vancouver",
+                    Province = "BC",
+                    PostalCode = "V5V 1J6",
+                    Country = "Canada",
+                    MobilePhone = "604-222-1111",
+                    SailingExperience = "medium",
+                };
+
+                result = userManager.CreateAsync(admin, "P@$$w0rd").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(admin, "Admin").Wait();
+                }
+            }
+
+            if (userManager.FindByEmailAsync("m@m.m").Result == null)
+            {
+                ApplicationUser member = new ApplicationUser()
+                {
+                    UserName = "m",
+                    Email = "m@m.m",
+                    FirstName = "Jane",
+                    LastName = "Member",
+                    Street = "Howe St",
+                    City = "Vancouver",
+                    Province = "BC",
+                    PostalCode = "V1T 7U9",
+                    Country = "Canada",
+                    MobilePhone = "604-999-2222",
+                    SailingExperience = "low",
+                };
+
+                result = userManager.CreateAsync(member, "P@$$w0rd").Result;
+
+                if (result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(member, "Member").Wait();
+                }
+            }
+        }
+
+        public static void SeedRoles(RoleManager<IdentityRole> roleManager)
+        {
+            if (!roleManager.RoleExistsAsync("Admin").Result)
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "Admin";
+                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
+            }
+
+            if (!roleManager.RoleExistsAsync("Member").Result)
+            {
+                IdentityRole role = new IdentityRole();
+                role.Name = "Member";
+                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
+            }
+        }
+
+        // Boats sample data
+        public static void GetBoats(ApplicationDbContext context)
+        {
+            context.Database.EnsureCreated();
+
+            // Look for any Boats.
+            if (context.Boats.Any())
+            {
+                return;   // DB has been seeded
+            }
+
             List<Boat> boats = new List<Boat>
             {
                 new Boat()
@@ -28,7 +103,7 @@ namespace LmycWeb.Data
                     Make = "Canada",
                     Year = 2017,
                     CreationDate = new DateTime(2018,01,01,8,00,00),
-                    //CreatedBy = adminUser.Id,
+                    CreatedBy = context.Users.FirstOrDefault(u => u.Email == "m@m.m").Id,
                 },
                 new Boat()
                 {
@@ -38,68 +113,26 @@ namespace LmycWeb.Data
                     Make = "China",
                     Year = 2018,
                     CreationDate = new DateTime(2018,01,17,19,00,00),
-                    //CreatedBy = memberUser.Id,
+                    CreatedBy = context.Users.FirstOrDefault(u => u.Email == "m@m.m").Id,
                 },
                 new Boat()
                 {
                     BoatName = "Third Boat",
                     Picture = "http://features.boats.com/boat-content/files/2018/01/cruisers-cantius-42.jpg?w=1200&h=1200",
                     LengthInFeet = 11.0,
-                    Make = "Brazil",
+                    Make = "Britain",
                     Year = 2016,
                     CreationDate = new DateTime(2018,02,17,19,00,00),
-                    //CreatedBy = memberUser.Id,
+                    CreatedBy = context.Users.FirstOrDefault(u => u.Email == "a@a.a").Id,
                 }
 
             };
-            
 
-            return boats.ToArray();
-
-            /*
-            public static void Initialize(ApplicationDbContext db)
+            foreach (Boat b in boats)
             {
-                if (!db.Boats.Any())
-                {
-                    db.Boats.Add(new Student
-                    {
-                        FirstName = "Bob",
-                        LastName = "Doe",
-                        School = "Engineering",
-                        StartDate = Convert.ToDateTime("2015/09/09")
-                    });
-                    db.Students.Add(new Student
-                    {
-                        FirstName = "Ann",
-                        LastName = "Lee",
-                        School = "Medicine",
-                        StartDate = Convert.ToDateTime("2014/09/09")
-                    });
-                    db.Students.Add(new Student
-                    {
-                        FirstName = "Sue",
-                        LastName = "Douglas",
-                        School = "Pharmacy",
-                        StartDate = Convert.ToDateTime("2016/01/01")
-                    });
-                    db.Students.Add(new Student
-                    {
-                        FirstName = "Tom",
-                        LastName = "Brown",
-                        School = "Business",
-                        StartDate = Convert.ToDateTime("2015/09/09")
-                    });
-                    db.Students.Add(new Student
-                    {
-                        FirstName = "Joe",
-                        LastName = "Mason",
-                        School = "Health",
-                        StartDate = Convert.ToDateTime("2015/01/01")
-                    });
-                    db.SaveChanges();
-                }
+                context.Boats.Add(b);
             }
-            */
+            context.SaveChanges();
         }
     }
 }
