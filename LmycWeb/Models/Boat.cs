@@ -21,6 +21,7 @@ namespace LmycWeb.Models
         [Display(Name = "Length In Feet")]
         public double LengthInFeet { get; set; }
 
+        [Required]
         public string Make { get; set; }
 
         [Required]
@@ -37,6 +38,10 @@ namespace LmycWeb.Models
         [Display(Name = "Created By")]
         public string CreatedBy { get; set; }
 
+        [Required]
+        public string ApplicationUserId { get; set; }
+
+        [Display(Name = "Added By")]
         public ApplicationUser User { get; set; }
 
         public List<Reservation> Reservations { get; set; }

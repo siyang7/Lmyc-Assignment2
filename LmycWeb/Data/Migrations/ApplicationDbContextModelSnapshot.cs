@@ -107,6 +107,9 @@ namespace LmycWeb.Data.Migrations
                     b.Property<int>("BoatId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired();
+
                     b.Property<string>("BoatName")
                         .IsRequired();
 
@@ -116,7 +119,8 @@ namespace LmycWeb.Data.Migrations
 
                     b.Property<double>("LengthInFeet");
 
-                    b.Property<string>("Make");
+                    b.Property<string>("Make")
+                        .IsRequired();
 
                     b.Property<string>("Picture");
 
@@ -262,7 +266,7 @@ namespace LmycWeb.Data.Migrations
             modelBuilder.Entity("LmycWeb.Models.Boat", b =>
                 {
                     b.HasOne("LmycWeb.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Boats")
                         .HasForeignKey("CreatedBy");
                 });
 

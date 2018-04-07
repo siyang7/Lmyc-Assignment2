@@ -67,5 +67,7 @@ namespace LmycWeb.Models
         [DataType(DataType.Text)]
         [DisplayName("Sailing Experience")]
         public string SailingExperience { get; set; }
+
+        public List<Boat> Boats { get; set; }
     }
 }

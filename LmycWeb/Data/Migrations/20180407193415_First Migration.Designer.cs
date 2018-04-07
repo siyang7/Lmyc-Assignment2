@@ -11,7 +11,7 @@ using System;
 namespace LmycWeb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180406000107_First Migration")]
+    [Migration("20180407193415_First Migration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -108,6 +108,9 @@ namespace LmycWeb.Data.Migrations
                     b.Property<int>("BoatId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired();
+
                     b.Property<string>("BoatName")
                         .IsRequired();
 
@@ -117,7 +120,8 @@ namespace LmycWeb.Data.Migrations
 
                     b.Property<double>("LengthInFeet");
 
-                    b.Property<string>("Make");
+                    b.Property<string>("Make")
+                        .IsRequired();
 
                     b.Property<string>("Picture");
 
@@ -263,7 +267,7 @@ namespace LmycWeb.Data.Migrations
             modelBuilder.Entity("LmycWeb.Models.Boat", b =>
                 {
                     b.HasOne("LmycWeb.Models.ApplicationUser", "User")
-                        .WithMany()
+                        .WithMany("Boats")
                         .HasForeignKey("CreatedBy");
                 });
 
