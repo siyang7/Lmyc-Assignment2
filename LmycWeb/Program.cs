@@ -29,9 +29,9 @@ namespace LmycWeb
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-                    DummyData.GetBoats(context);
-                    DummyData.SeedUsers(userManager);
                     DummyData.SeedRoles(roleManager);
+                    DummyData.SeedUsers(userManager);
+                    DummyData.GetBoats(context);
                 }
                 catch (Exception ex)
                 {

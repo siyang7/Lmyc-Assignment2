@@ -103,7 +103,7 @@ namespace LmycWeb.Data
                     Make = "Canada",
                     Year = 2017,
                     CreationDate = new DateTime(2018,01,01,8,00,00),
-                    CreatedBy = context.Users.FirstOrDefault(u => u.Email == "m@m.m").Id,
+                    ApplicationUserId = context.Users.FirstOrDefault(u => u.Email == "m@m.m").Id,
                 },
                 new Boat()
                 {
@@ -113,7 +113,7 @@ namespace LmycWeb.Data
                     Make = "China",
                     Year = 2018,
                     CreationDate = new DateTime(2018,01,17,19,00,00),
-                    CreatedBy = context.Users.FirstOrDefault(u => u.Email == "m@m.m").Id,
+                    User = context.Users.FirstOrDefault(u => u.Email == "m@m.m"),
                 },
                 new Boat()
                 {
@@ -123,7 +123,7 @@ namespace LmycWeb.Data
                     Make = "Britain",
                     Year = 2016,
                     CreationDate = new DateTime(2018,02,17,19,00,00),
-                    CreatedBy = context.Users.FirstOrDefault(u => u.Email == "a@a.a").Id,
+                    User = context.Users.FirstOrDefault(u => u.Email == "a@a.a"),
                 }
 
             };

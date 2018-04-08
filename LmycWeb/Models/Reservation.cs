@@ -15,14 +15,13 @@ namespace LmycWeb.Models
         [ForeignKey("User")]
         [DisplayName("Created By")]
         public string CreatedBy { get; set; }
-
-        [ScaffoldColumn(false)]
+        
         public ApplicationUser User { get; set; }
-
-        [ScaffoldColumn(false)]
+        
+        [ForeignKey("Boat")]
         public int BoatId { get; set; }
-
-        [ScaffoldColumn(false)]
+        
+        [DisplayName("Boat")]
         public Boat Boat { get; set; }
 
         [Required(ErrorMessage = "Start Date Time is required.")]

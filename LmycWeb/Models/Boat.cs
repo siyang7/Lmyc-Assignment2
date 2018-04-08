@@ -9,6 +9,7 @@ namespace LmycWeb.Models
 {
     public class Boat
     {
+        [Key]
         public int BoatId { get; set; }
 
         [Required]
@@ -28,22 +29,14 @@ namespace LmycWeb.Models
         public int Year { get; set; }
 
         [Required]
-        [ScaffoldColumn(false)]
         [DataType(DataType.Date)]
         [Display(Name = "Creation Date")]
         public DateTime CreationDate { get; set; } = DateTime.UtcNow;
-
-        [ForeignKey("User")]
-        [ScaffoldColumn(false)]
-        [Display(Name = "Created By")]
-        public string CreatedBy { get; set; }
 
         [Required]
         public string ApplicationUserId { get; set; }
 
         [Display(Name = "Added By")]
         public ApplicationUser User { get; set; }
-
-        public List<Reservation> Reservations { get; set; }
     }
 }
