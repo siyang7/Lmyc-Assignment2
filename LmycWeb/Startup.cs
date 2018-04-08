@@ -83,6 +83,9 @@ namespace LmycWeb
                 options.DisableHttpsRequirement();
             });
 
+            // Add application services.
+            services.AddTransient<IEmailSender, EmailSender>();
+
             services.AddAuthorization(options => {
                 options.AddPolicy("RequireLogin", policy => policy.RequireRole("Admin, Member"));
                 options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin"));
