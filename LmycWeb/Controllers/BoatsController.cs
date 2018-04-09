@@ -57,16 +57,15 @@ namespace LmycWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BoatId,BoatName,Picture,LengthInFeet,Make,Year,CreationDate,ApplicationUserId")] Boat boat)
+        public async Task<IActionResult> Create([Bind("BoatId,BoatName,Picture,LengthInFeet,Make,Year,RecordCreationDate,ApplicationUserId")] Boat boat)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(boat);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ApplicationUserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", boat.ApplicationUserId);
-            return View(boat);
+            boat.CreationDate = DateTime.Now;
+            boat.User = _context.Users.FirstOrDefault(
+                u => u.UserName == User.Identity.Name
+            );
+            _context.Add(boat);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Boats/Edit/5
