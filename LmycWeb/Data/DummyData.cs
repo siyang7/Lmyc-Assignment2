@@ -124,8 +124,17 @@ namespace LmycWeb.Data
                     Year = 2016,
                     CreationDate = new DateTime(2018,02,17,19,00,00),
                     User = context.Users.FirstOrDefault(u => u.Email == "a@a.a"),
-                }
-
+                },
+                //new Boat()
+                //{
+                //    BoatName = "Fourth Boat",
+                //    Picture = "http://features.boats.com/boat-content/files/2018/01/cruisers-cantius-42.jpg?w=1200&h=1200",
+                //    LengthInFeet = 11.0,
+                //    Make = "Britain",
+                //    Year = 2016,
+                //    CreationDate = new DateTime(2018,02,17,19,00,00),
+                //    User = context.Users.FirstOrDefault(u => u.Email == "m@m.m"),
+                //},
             };
 
             foreach (Boat b in boats)
