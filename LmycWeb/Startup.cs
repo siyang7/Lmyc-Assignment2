@@ -39,8 +39,8 @@ namespace LmycWeb
             services.AddCors();
 
             services.AddDbContext<ApplicationDbContext>(options => {
-                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-                //options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+                //options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"));
+                options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
                 options.UseOpenIddict();
             });
 

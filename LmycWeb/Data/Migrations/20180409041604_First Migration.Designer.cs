@@ -11,15 +11,14 @@ using System;
 namespace LmycWeb.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180408233033_First Migration")]
+    [Migration("20180409041604_First Migration")]
     partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
             modelBuilder.Entity("LmycWeb.Models.ApplicationUser", b =>
                 {
@@ -76,6 +75,8 @@ namespace LmycWeb.Data.Migrations
                     b.Property<string>("Province")
                         .IsRequired();
 
+                    b.Property<string>("RolesModelRoleId");
+
                     b.Property<string>("SailingExperience")
                         .IsRequired();
 
@@ -97,8 +98,9 @@ namespace LmycWeb.Data.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasName("UserNameIndex");
+
+                    b.HasIndex("RolesModelRoleId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -154,6 +156,20 @@ namespace LmycWeb.Data.Migrations
                     b.ToTable("Reservations");
                 });
 
+            modelBuilder.Entity("LmycWeb.Models.RolesModel", b =>
+                {
+                    b.Property<string>("RoleId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("RoleName");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("RolesModel");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -172,8 +188,7 @@ namespace LmycWeb.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -392,10 +407,16 @@ namespace LmycWeb.Data.Migrations
                     b.HasIndex("AuthorizationId");
 
                     b.HasIndex("ReferenceId")
-                        .IsUnique()
-                        .HasFilter("[ReferenceId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("OpenIddictTokens");
+                });
+
+            modelBuilder.Entity("LmycWeb.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("LmycWeb.Models.RolesModel")
+                        .WithMany("Users")
+                        .HasForeignKey("RolesModelRoleId");
                 });
 
             modelBuilder.Entity("LmycWeb.Models.Boat", b =>

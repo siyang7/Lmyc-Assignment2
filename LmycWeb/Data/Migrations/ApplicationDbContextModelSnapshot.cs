@@ -17,8 +17,7 @@ namespace LmycWeb.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125");
 
             modelBuilder.Entity("LmycWeb.Models.ApplicationUser", b =>
                 {
@@ -98,8 +97,7 @@ namespace LmycWeb.Data.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasName("UserNameIndex");
 
                     b.HasIndex("RolesModelRoleId");
 
@@ -189,8 +187,7 @@ namespace LmycWeb.Data.Migrations
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles");
                 });
@@ -409,8 +406,7 @@ namespace LmycWeb.Data.Migrations
                     b.HasIndex("AuthorizationId");
 
                     b.HasIndex("ReferenceId")
-                        .IsUnique()
-                        .HasFilter("[ReferenceId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("OpenIddictTokens");
                 });
