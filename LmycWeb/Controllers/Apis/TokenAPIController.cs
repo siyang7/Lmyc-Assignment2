@@ -24,10 +24,10 @@ using Microsoft.AspNetCore.Mvc;
 using OpenIddict.Core;
 using OpenIddict.Models;
 
-namespace Mvc.Server
+namespace LmycWeb.Controllers.Apis
 {
     //[EnableCors("RequireLogin, RequireAdmin")]
-    [Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     public class TokenAPIController : Controller
     {
         private readonly OpenIddictApplicationManager<OpenIddictApplication> _applicationManager;
