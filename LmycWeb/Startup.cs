@@ -38,9 +38,19 @@ namespace LmycWeb
 
             services.AddCors();
 
+            // Add service & create Policy with options
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy",
+            //        builder => builder.AllowAnyOrigin()
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //        .AllowCredentials());
+            //});
+
             services.AddDbContext<ApplicationDbContext>(options => {
-                //options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"));
-                options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+                options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"));
+                //options.UseSqlServer(config.GetConnectionString("DefaultConnection"));
                 options.UseOpenIddict();
             });
 
@@ -91,7 +101,7 @@ namespace LmycWeb
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -119,6 +129,8 @@ namespace LmycWeb
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //context.Database.Migrate();
         }
     }
 }

@@ -26,6 +26,5 @@ namespace LmycWeb.Data
         public DbSet<Boat> Boats { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        public DbSet<LmycWeb.Models.RolesModel> RolesModel { get; set; }
     }
 }
