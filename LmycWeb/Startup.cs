@@ -130,7 +130,7 @@ namespace LmycWeb
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //context.Database.Migrate();
+            context.Database.Migrate();
         }
     }
 }
