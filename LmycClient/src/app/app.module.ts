@@ -7,9 +7,9 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { GetBoatsComponent } from './get-boats/get-boats.component';
 import { MakeReservationsComponent } from './make-reservations/make-reservations.component';
 import { ReservationsComponent } from './reservations/reservations.component';
+import { AccountService } from './account.service';
 
 const appRoutes: Routes = [
   {
@@ -35,7 +35,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    GetBoatsComponent,
     MakeReservationsComponent,
     ReservationsComponent
   ],
@@ -46,7 +45,7 @@ const appRoutes: Routes = [
     HttpModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AccountService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

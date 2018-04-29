@@ -1,3 +1,17 @@
-<p>
-  login works!
-</p>
+<div class="alert alert-danger" *ngIf="error.length > 0" style="width: 100%">
+  <strong>Error Message: </strong> {{ error }}
+</div>
+
+<h1>Login</h1>
+
+<hr />
+
+<input [(ngModel)]="username" runat="server" type="text" class="form-control" name="user" placeholder="Username" required="" />
+
+<br />
+
+<input [(ngModel)]="password" runat="server" type="password" class="form-control" name="password" placeholder="Password" required="" />
+
+<button id="btnLogin" runat="server" class="btn btn-lg btn-info" style="width: 100%" (click)="doLogin()" ng-disabled="query">
+  {{ query ? "Please wait..." : "Login" }}<i class="glyphicon glyphicon-log-in"></i>
+</button>
