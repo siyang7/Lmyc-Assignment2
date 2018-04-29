@@ -1,27 +1,50 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
-import { GetBoatsComponent } from './get-boats/get-boats.component';
-import { GetReservationsComponent } from './get-reservations/get-reservations.component';
-import { LoginComponent } from './login/login.component';
+import { Routes, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'
+
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { GetBoatsComponent } from './get-boats/get-boats.component';
+import { MakeReservationsComponent } from './make-reservations/make-reservations.component';
+import { ReservationsComponent } from './reservations/reservations.component';
+
+const appRoutes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'reservations',
+    component: ReservationsComponent
+  },
+  {
+    path: 'makeReservations',
+    component: MakeReservationsComponent
+  },
+  {
+    path: '',
+    redirectTo: '/login',
+    pathMatch: 'full'
+  },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     GetBoatsComponent,
-    GetReservationsComponent,
-    LoginComponent
+    MakeReservationsComponent,
+    ReservationsComponent
   ],
   imports: [
-    BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
-    HttpModule,
+    BrowserModule,
+    RouterModule.forRoot(appRoutes),
     FormsModule,
-    RouterModule.forRoot([
-      { path: 'get-boats', component: GetBoatsComponent }
-    ])
+    HttpModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
