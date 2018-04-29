@@ -13,7 +13,7 @@ export class AccountService {
 
   constructor(private client: HttpClient) { 
     // set account api to hook
-    this.url = environment.localUrl + "/reservations";
+    this.url = environment.localUrl + "Account/";
   }
 
   public getHttpHeaderOptions(): any {
