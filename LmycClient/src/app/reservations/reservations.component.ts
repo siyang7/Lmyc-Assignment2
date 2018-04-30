@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ReservationsService } from '../reservation.service';
+import { Reservation } from '../reservation';
 
 @Component({
   selector: 'app-reservations',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReservationsComponent implements OnInit {
 
-  constructor() { }
+  public reservations: Array<Reservation> = [];
+
+  constructor(private reservationService: ReservationsService) { }
 
   ngOnInit() {
+    this.reservationService.GetReservations()
+      .then(r => {
+        this.reservations = r;
+      }).catch(r => {
+        alert("Error getting reservations: " + r);
+      });
   }
-
 }

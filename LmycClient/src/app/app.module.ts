@@ -10,6 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { MakeReservationsComponent } from './make-reservations/make-reservations.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { AccountService } from './account.service';
+import { BoatService } from './boat.service';
+import { ReservationsService } from './reservation.service';
 
 const appRoutes: Routes = [
   {
@@ -45,7 +47,7 @@ const appRoutes: Routes = [
     HttpModule,
     HttpClientModule,
   ],
-  providers: [AccountService],
+  providers: [AccountService, BoatService, ReservationsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
