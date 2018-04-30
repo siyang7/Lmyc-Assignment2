@@ -15,7 +15,7 @@ namespace LmycWeb.Controllers.Apis
 {
     [Produces("application/json")]
     [Route("api/Reservations")]
-    //[Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     [EnableCors("CorsPolicy")]
     public class ReservationsAPIController : Controller
     {
