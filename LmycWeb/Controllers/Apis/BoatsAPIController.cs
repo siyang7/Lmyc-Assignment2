@@ -15,7 +15,7 @@ namespace LmycWeb.Controllers.Apis
 {
     [Produces("application/json")]
     [Route("api/BoatsAPI")]
-    [Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     [EnableCors("CorsPolicy")]
     public class BoatsAPIController : Controller
     {
