@@ -26,7 +26,9 @@ using OpenIddict.Models;
 
 namespace LmycWeb.Controllers.Apis
 {
+    [Produces("application/json")]
     [EnableCors("CorsPolicy")]
+    [Route("api/Account")]
     //[Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     public class TokenAPIController : Controller
     {

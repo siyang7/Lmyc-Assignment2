@@ -114,6 +114,8 @@ namespace LmycWeb
                 app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseCors("CorsPolicy");
+
             app.UseStaticFiles();
 
             //app.UseCors(builder => builder.WithOrigins("http://localhost:49927/")
