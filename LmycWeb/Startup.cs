@@ -36,17 +36,17 @@ namespace LmycWeb
         {
             services.AddMvc();
 
-            services.AddCors();
+            //services.AddCors();
 
-            // Add service & create Policy with options
-            //services.AddCors(options =>
-            //{
-            //    options.AddPolicy("CorsPolicy",
-            //        builder => builder.AllowAnyOrigin()
-            //        .AllowAnyMethod()
-            //        .AllowAnyHeader()
-            //        .AllowCredentials());
-            //});
+            //Add service &create Policy with options
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
             services.AddDbContext<ApplicationDbContext>(options => {
                 options.UseSqlite(Configuration.GetConnectionString("SqliteConnection"));
@@ -95,7 +95,7 @@ namespace LmycWeb
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddAuthorization(options => {
-                options.AddPolicy("RequireLogin", policy => policy.RequireRole("Admin, Member"));
+                options.AddPolicy("RequireLogin", policy => policy.RequireAuthenticatedUser());
                 options.AddPolicy("RequireAdmin", policy => policy.RequireRole("Admin"));
             });
         }
@@ -116,10 +116,10 @@ namespace LmycWeb
 
             app.UseStaticFiles();
 
-            app.UseCors(builder => builder.WithOrigins("https://localhost:49928/")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials());
+            //app.UseCors(builder => builder.WithOrigins("http://localhost:49927/")
+            //    .AllowAnyHeader()
+            //    .AllowAnyMethod()
+            //    .AllowCredentials());
 
             app.UseAuthentication();
 
