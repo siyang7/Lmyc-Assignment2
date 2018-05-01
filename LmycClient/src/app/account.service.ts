@@ -30,17 +30,15 @@ export class AccountService {
 
   public authenticate(username: string, password: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-      var Input: any = {
-        Username: username,
-        Password: password,
-        grant_type: "password",
-      }
+
+      var grant_type = "password";
+      let body = `username=${username}&password=${password}&grant_type=${grant_type}`;
 
       let options = {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
       };
 
-      this.client.post(this.url, Input, options) // added options here
+      this.client.post(this.url, body, options) // added options here
         .toPromise()
         .then((r: string) => { // r is token
           if (r.length == 0) {

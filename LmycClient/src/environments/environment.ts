@@ -4,6 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: true,
+  production: false,
+  //localUrl: "http://localhost:49928/",
   localUrl: "https://lmycweb-asn2.azurewebsites.net/",
 };
