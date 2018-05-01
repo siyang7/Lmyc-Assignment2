@@ -90,7 +90,7 @@ namespace LmycWeb
                 options.AllowPasswordFlow();
 
                 // During development, you can disable the HTTPS requirement.
-                if (_env.IsDevelopment)
+                if (_env.IsDevelopment())
                     options.DisableHttpsRequirement();
             });
 
