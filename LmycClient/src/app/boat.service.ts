@@ -13,15 +13,13 @@ export class BoatService {
   private boatURL: string;
 
   constructor(private client: HttpClient, private accountService: AccountService) {
-    this.boatURL = environment.localUrl + "boats/";
+    this.boatURL = environment.localUrl + "api/boatsapi/";
   }
 
   public GetBoats(): Promise<Boat[]> {
     return new Promise<Boat[]>((resolve, reject) => {
 
-      this.client.get(this.boatURL
-        //, this.accountService.getHttpHeaderOptions()
-      )
+      this.client.get(this.boatURL, this.accountService.getHttpHeaderOptions())
         .toPromise()
         .then((resultSets: any) => {
           resolve(resultSets as (Boat[]));

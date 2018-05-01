@@ -13,7 +13,7 @@ export class AccountService {
 
   constructor(private client: HttpClient) { 
     // set account api to hook
-    this.url = environment.localUrl + "Account/";
+    this.url = environment.localUrl + "connect/token/";
   }
 
   public getHttpHeaderOptions(): any {
@@ -32,10 +32,15 @@ export class AccountService {
     return new Promise<string>((resolve, reject) => {
       var Input: any = {
         Username: username,
-        Password: password
+        Password: password,
+        grant_type: "password",
       }
 
-      this.client.post(this.url, Input)
+      let options = {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      };
+
+      this.client.post(this.url, Input, options) // added options here
         .toPromise()
         .then((r: string) => { // r is token
           if (r.length == 0) {

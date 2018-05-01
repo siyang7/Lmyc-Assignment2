@@ -10,15 +10,13 @@ export class ReservationsService {
   private reservationURL: string;
 
   constructor(private client: HttpClient, private accountService: AccountService) {
-    this.reservationURL = environment.localUrl + "reservations/";
+    this.reservationURL = environment.localUrl + "api/reservations/";
   }
 
   public GetReservations(): Promise<Reservation[]> {
     return new Promise<Reservation[]>((resolve, reject) => {
 
-      this.client.get(this.reservationURL
-        //,this.accountService.getHttpHeaderOptions()
-      )
+      this.client.get(this.reservationURL,this.accountService.getHttpHeaderOptions())
         .toPromise()
         .then((resultSet: any) => {
             //list of reservations.
