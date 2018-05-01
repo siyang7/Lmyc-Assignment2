@@ -18,10 +18,12 @@ namespace LmycWeb
     public class Startup
     {
         private IConfiguration config;
+        private IHostingEnvironment _env;
 
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
 
             var builder = new ConfigurationBuilder();
             builder.SetBasePath(env.ContentRootPath);
@@ -88,7 +90,8 @@ namespace LmycWeb
                 options.AllowPasswordFlow();
 
                 // During development, you can disable the HTTPS requirement.
-                //options.DisableHttpsRequirement();
+                if (_env.IsDevelopment)
+                    options.DisableHttpsRequirement();
             });
 
             // Add application services.
