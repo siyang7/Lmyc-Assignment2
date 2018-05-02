@@ -19,7 +19,7 @@ export class AccountService {
   public getHttpHeaderOptions(): any {
     return {
       headers: new HttpHeaders({
-        'Authorization' : 'Bearer' + this.token
+        'Authorization' : 'Bearer ' + this.token
       })
     };
   }
@@ -46,8 +46,8 @@ export class AccountService {
           }
 
           this.authenticated = true;
-          this.token = r;
-
+          this.token = r.access_token;
+          console.log(this.token);
           resolve(r);
         }).catch(r => {
           reject(r);
