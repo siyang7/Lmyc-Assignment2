@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Headers, RequestOptions } from '@angular/http';
 import { environment } from './../environments/environment'
 import 'rxjs/add/operator/map'
+import { Token } from './token';
 
 @Injectable()
 export class AccountService {
@@ -40,15 +41,15 @@ export class AccountService {
 
       this.client.post(this.url, body, options) // added options here
         .toPromise()
-        .then((r: string) => { // r is token
-          if (r.length == 0) {
+        .then((r: Token) => { // r is token
+          if (r == null) {
             return reject("invalid username and/or password.");
           }
 
           this.authenticated = true;
           this.token = r.access_token;
-          console.log(this.token);
-          resolve(r);
+          //console.log(this.token);
+          resolve(r.access_token);
         }).catch(r => {
           reject(r);
         });
