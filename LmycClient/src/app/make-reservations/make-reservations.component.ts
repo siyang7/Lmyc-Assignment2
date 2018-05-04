@@ -30,12 +30,12 @@ export class MakeReservationsComponent implements OnInit {
 
     let r: Reservation = new Reservation();
 
-    r.startDateTime = this.startDateT.toISOString();
-    r.endDateTime = this.endDateT.toISOString();
+    r.startDateTime = this.startDateT.toLocaleString();
+    r.endDateTime = this.endDateT.toLocaleString();
     r.boatId = parseInt(this.selectedBoat);
 
     this.reservationsService.CreateReservation(r).then(r => {
-      this.router.navigate(["/reservations/"]);
+      this.router.navigate(["/reservations"]);
     })
   }
 }
