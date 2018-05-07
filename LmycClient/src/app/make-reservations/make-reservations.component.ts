@@ -12,8 +12,8 @@ import { Reservation } from '../reservation';
 export class MakeReservationsComponent implements OnInit {
 
   public boats: Boat[] = [];
-  public startDateT: Date = new Date();
-  public endDateT: Date = new Date();
+  public startDateT: Date;
+  public endDateT: Date;
   public selectedBoat: string = null;
 
   constructor(private boatService: BoatService, private reservationsService: ReservationsService, private router: Router) { }
@@ -33,6 +33,8 @@ export class MakeReservationsComponent implements OnInit {
     r.startDateTime = this.startDateT.toLocaleString();
     r.endDateTime = this.endDateT.toLocaleString();
     r.boatId = parseInt(this.selectedBoat);
+
+    console.log(this.startDateT);
 
     this.reservationsService.CreateReservation(r).then(r => {
       this.router.navigate(["/reservations"]);

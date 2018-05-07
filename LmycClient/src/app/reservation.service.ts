@@ -29,7 +29,7 @@ export class ReservationsService {
   }
   
   public CreateReservation(resv: Reservation): Promise<boolean> {
-    resv.userId = resv.id = undefined;
+    resv.userId = resv.reservationId = undefined;
 
     return new Promise<boolean>((resolve, reject) => {
       this.client.post(this.reservationURL, resv,

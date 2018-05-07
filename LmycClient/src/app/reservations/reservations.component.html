@@ -15,7 +15,7 @@
     <tbody>
     <tr *ngFor="let r of reservations">
         <td>{{r.reservationId}}</td>
-        <td>{{r.boat}}</td>
+        <td>{{r.boat.boatName}}</td>
         <td>{{r.userId}}</td>
         <td>{{r.startDateTime}}</td>
         <td>{{r.endDateTime}}</td>
